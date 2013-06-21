@@ -37,7 +37,7 @@ console.log("Unfortunately for our hero, in this dungeon, the creatures see all.
 
 monsters = spawnMonsters(1);
 
-var outputMonsterStatus(monster) {
+var outputMonsterStatus = function (monster) {
 	if (monsters[i].isAlive()) {
 		console.log("(to those who know like you and me, this left poor " + monsters[i].getName());
 		if (!(i % 2)) {
@@ -49,7 +49,7 @@ var outputMonsterStatus(monster) {
 		console.log("This proved to be the deathblow for " + monsters[i].getName() + ", and the beast became as dust in the earth.");
 		monsters.splice(i,1);
 	}
-}
+};
 
 while (monsters.length) {
 	if (battles > 0) {
@@ -62,9 +62,14 @@ while (monsters.length) {
 	for (i = 0; i < monsters.length; i++) {
 		if (i) lastMonster = monsters[i-1].getName();
 		if (!(i % 2)) {
-			console.log("\"My name is " + monsters[i].getName() + ",\" the beast began.");
-			console.log("But it was given no leave to finish its statement, before it was");
-			console.log("hit by a fireball for 5 damage!");
+			if (monsters[i].getHP() == 15) {
+				console.log("\"My name is " + monsters[i].getName() + ",\" the beast began.");
+				console.log("But it was given no leave to finish its statement, before it was");
+				console.log("hit by a fireball for 5 damage!");
+			} else {
+				console.log("The mage returned his attention to " + monsters[i].getName() + " and blasted him with a fireball");
+				console.log("for 5 damage!");
+			}
 			monsters[i].strike(5); 
 		} else {
 			console.log("\"" + lastMonster + "! I will heal you!\" And it was done by " + monsters[i].getName());
