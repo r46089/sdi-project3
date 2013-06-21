@@ -52,10 +52,6 @@ var outputMonsterStatus = function (monster) {
 };
 
 while (monsters.length) {
-	if (battles > 0) {
-		console.log("But the fight wasn't over yet, and a new wave appeared...");
-	}
-
 	var i = 0;
 	var lastMonster = "";
 
@@ -80,6 +76,11 @@ while (monsters.length) {
 		outputMonsterStatus(monsters[i]);
 	}
 
-	if (!monsters.length) monsters = spawnMonsters(++battles);
+	if (!monsters.length) {
+		monsters = spawnMonsters(++battles);
+		if (monsters.length) {
+			console.log("But the fight wasn't over yet, and a new wave appeared...");
+		}
+	}
 }
 
