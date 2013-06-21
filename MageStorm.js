@@ -1,15 +1,20 @@
 
-var Monster =
-{
-  name: "",
-  HP: 15,
-  getHP: function() { return this.HP; },
-  strike: function (damage) { if (this.damage > this.HP) this.HP = 0; else this.HP = this.HP - damage; },
-  heal: function (heal) { this.HP = this.HP + heal; },
-  getName: function() { return this.name; },
-  setName: function(newName) { this.name = newName; },
-  isAlive: function() { if (this.HP <= 0) return false; else return true; }
+var newMonster = function() {
+	var Monster =
+	{
+	  name: "",
+	  HP: 15,
+	  getHP: function() { return this.HP; },
+	  strike: function (damage) { if (this.damage > this.HP) this.HP = 0; else this.HP = this.HP - damage; },
+	  heal: function (heal) { this.HP = this.HP + heal; },
+	  getName: function() { return this.name; },
+	  setName: function(newName) { this.name = newName; },
+	  isAlive: function() { if (this.HP <= 0) return false; else return true; }
+	};
+
+	return Monster;
 }
+
 
 var monsters = [];
 var battles = 0;
@@ -17,11 +22,11 @@ var battles = 0;
 function spawnMonsters(count) {
 	var i = 0;
 	var newMonsters = [];
-	var thisMonster = Monster;
-	for (i = 0; i < mageStormSettings.monsterNames.length && mageStormSettings.monsterNames.length > 0; i++) {
+	var thisMonster = newMonster();
+	for (i = 0; i < mageStormSettings.monsterNames.length && mageStormSettings.monsterNames.length > 0 && i < count; i++) {
 		thisMonster.setName(mageStormSettings.monsterNames.pop());
 		newMonsters.push(thisMonster);
-		thisMonster = Monster;
+		thisMonster = newMonster();
 	}
 
 	return newMonsters;
@@ -39,6 +44,7 @@ while (monsters.length) {
 
 	var i = 0;
 	var lastMonster = "";
+
 	for (i = 0; i < monsters.length; i++) {
 		if (i) lastMonster = monsters[i-1].getName();
 		if (!(i % 2)) {
@@ -57,8 +63,7 @@ while (monsters.length) {
 			if (!(i % 2)) {
 				console.log("with " + monsters[i].getHP() + " health)");
 			} else {
-				console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had ");
-				console.log(monsters[i-1].getHP() + " health!)");
+				console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had " + monsters[i-1].getHP() + " health!)");
 			}
 		} else {
 			console.log("This proved to be the deathblow for " + monsters[i].getName() + ", and the beast became as dust in the earth.");
