@@ -19,7 +19,7 @@ var newMonster = function() {
 var monsters = [];
 var battles = 0;
 
-function spawnMonsters(count) {
+var spawnMonsters = function(count) {
 	var i = 0;
 	var newMonsters = [];
 	var thisMonster = newMonster();
@@ -36,6 +36,20 @@ console.log("The mage creeped around the demon's den, cautious not to attract at
 console.log("Unfortunately for our hero, in this dungeon, the creatures see all...");
 
 monsters = spawnMonsters(1);
+
+var outputMonsterStatus(monster) {
+	if (monsters[i].isAlive()) {
+		console.log("(to those who know like you and me, this left poor " + monsters[i].getName());
+		if (!(i % 2)) {
+			console.log("with " + monsters[i].getHP() + " health)");
+		} else {
+			console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had " + monsters[i-1].getHP() + " health!)");
+		}
+	} else {
+		console.log("This proved to be the deathblow for " + monsters[i].getName() + ", and the beast became as dust in the earth.");
+		monsters.splice(i,1);
+	}
+}
 
 while (monsters.length) {
 	if (battles > 0) {
@@ -58,20 +72,10 @@ while (monsters.length) {
 			monsters[i].strike(5);
 			monsters[i-1].heal(3);
 		}
-		if (monsters[i].isAlive()) {
-			console.log("(to those who know like you and me, this left poor " + monsters[i].getName());
-			if (!(i % 2)) {
-				console.log("with " + monsters[i].getHP() + " health)");
-			} else {
-				console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had " + monsters[i-1].getHP() + " health!)");
-			}
-		} else {
-			console.log("This proved to be the deathblow for " + monsters[i].getName() + ", and the beast became as dust in the earth.");
-			monsters.splice(i,1);
-		}
+
+		outputMonsterStatus(monsters[i]);
 	}
 
 	if (!monsters.length) monsters = spawnMonsters(++battles);
 }
-
 
