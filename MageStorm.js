@@ -67,8 +67,7 @@ while (monsters.length) {
 				console.log("But it was given no leave to finish its statement, before it was");
 				console.log("hit by a fireball for 5 damage!");
 			} else {
-				console.log("The mage returned his attention to " + monsters[i].getName() + " and blasted him with a fireball");
-				console.log("for 5 damage!");
+				console.log("The mage returned his attention to " + monsters[i].getName() + " and blasted him with a fireball for 5 damage!");
 			}
 			monsters[i].strike(5); 
 		} else {
