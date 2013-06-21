@@ -18,8 +18,8 @@ function spawnMonsters(count) {
 	var i = 0;
 	var newMonsters = [];
 	var thisMonster = Monster;
-	for (i = 0; i < mageStormSettings.monsterNames.length && monsterNames.length > 0; i++) {
-		thisMonster.setName(monsterNames.pop());
+	for (i = 0; i < mageStormSettings.monsterNames.length && mageStormSettings.monsterNames.length > 0; i++) {
+		thisMonster.setName(mageStormSettings.monsterNames.pop());
 		newMonsters.push(thisMonster);
 		thisMonster = Monster;
 	}
@@ -52,12 +52,17 @@ while (monsters.length) {
 			monsters[i].strike(5);
 			monsters[i-1].heal(3);
 		}
-		console.log("(to those who know like you and me, this left poor " + monsters[i].getName());
-		if (!(i % 2)) {
-			console.log("with " + monsters[i].getHP() + " health)");
+		if (monsters[i].isAlive()) {
+			console.log("(to those who know like you and me, this left poor " + monsters[i].getName());
+			if (!(i % 2)) {
+				console.log("with " + monsters[i].getHP() + " health)");
+			} else {
+				console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had ");
+				console.log(monsters[i-1].getHP() + " health!)");
+			}
 		} else {
-			console.log("with " + monsters[i].getHP() + " health -- but " + lastMonster + " now had ");
-			console.log(monsters[i-1].getHP() + " health!)");
+			console.log("This proved to be the deathblow for " + monsters[i].getName() + ", and the beast became as dust in the earth.");
+			monsters.splice(i,1);
 		}
 	}
 
